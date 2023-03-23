@@ -113,15 +113,16 @@ impl MulAssign<f64> for Vec3 {
     }
 }
 
-impl Mul<Vec3> for Vec3 {
+impl Mul<Vec3> for f64 {
+    // allows multiplication of scalar to vector
     type Output = Vec3; // in the native code https://stackoverflow.com/questions/39115363/why-do-rusts-operators-have-the-type-output-variable
 
     fn mul(self, other: Vec3) -> Vec3 {
         Vec3 {
             e: [
-                self[0] * other[0],
-                self[1] * other[1],
-                self[2] * other[2]
+                self * other[0],
+                self * other[1],
+                self * other[2]
             ]
         }
     }
@@ -187,6 +188,7 @@ impl Vec3 {
     
     pub fn normalized(self) -> Vec3 {
         self / self.length()
+        // convert to unit vector
     }
     
     pub fn format_color(self) -> String {
